@@ -1,83 +1,116 @@
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <div ng-app="myApp" ng-controller="myAppController">
     <div class="container">
         <div class="col s10">
-        <div ng-show="modes[0]">
-            <h1 class="center-align">Har vi aldrig?</h1>
-            <div class="row">
-                <form class="col s12">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix" style="color:#78d649">check_circle</i>
-                            <input ng-model="realQuestion" placeholder="Jag har aldrig..." id="realQuestion" type="text" class="validate">
-                            <label for="realQuestion" class="active">Correct Question</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix" style="color:red">close</i>
-                            <input ng-model="trickQuestion" placeholder="Jag har aldrig..." id="trickQuestion" type="text" class="validate">
-                            <label for="trickQuestion" class="active">Trick Question</label>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <button ng-click="goToMode(1)" class="btn right waves-effect waves-light submitButton" type="submit" name="action">Nästa
-                <i style="float:left" class="material-icons right">send</i>
-            </button>
-            <button ng-click="clearText()" class="btn left" type="submit" name="action">Clear
-                <i class="material-icons left">close</i>
-            </button>
-        </div>
+            <div ng-show="modes[0]">
+                <h1 class="center-align ">Har vi aldrig?</h1>
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s10">
+                                <i class="material-icons prefix" style="color:#78d649">check_circle</i>
+                                <textarea ng-model="realQuestion" placeholder="Jag har aldrig..." id="realQuestion"
+                                          type="text" class="validate"></textarea>
+                                <label for="realQuestion" class="active">Correct Question</label>
+                            </div>
 
-        <div ng-show="modes[1]" class="view1">
-            <h1 class="center-align">Har du aldrig?</h1>
-            <div class="row">
-                <div class="col s12">
-                    <div class="card B0-30">
-                        <div class="card-content white-text">
-                            <i>Drick om du har gjort det</i>
-                            <span class="card-title">{{realQuestion}}</span>
+                            <div class="btn-group">
+                                <button ng-click="animate($event,700, 'shake'); getRandomWord('top')"
+                                        class="btn col s2 right noMargin noPadding solid top dark-20">
+                                    <i class="material-icons prefix">casino</i></button>
+                                <button ng-click="animate($event,1000, 'flyout'); eraseText('top')"
+                                        class="btn col s2 right noMargin noPadding solid bottom dark-20">
+                                    <i class="material-icons icon-turn-180 prefix">keyboard_tab</i></button>
+                            </div>
                         </div>
-                    </div>
+                        <div class="row">
+                        <button ng-click="animate($event,400, 'spin'); switchQuestions()" class="btn col s2 offset-s10 solid whiteborder dark-20"
+                                style="">
+                            <i class="material-icons icon-turn-45 prefix">sync</i>
+                        </button>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s10">
+                                <i class="material-icons prefix" style="color:red">close</i>
+                                <textarea ng-model="trickQuestion" placeholder="Jag har aldrig..." id="trickQuestion"
+                                          type="text" class="validate"></textarea>
+                                <label for="trickQuestion" class="active">Trick Question</label>
+                            </div>
+                            <div class="btn-group">
+                                <button ng-click="animate($event,700,'shake'); getRandomWord('bottom'); "
+                                        class="btn col s2 right noMargin noPadding solid top dark-20">
+                                    <i class="material-icons prefix">casino</i></button>
+                                <button ng-click="animate($event,1000, 'flyout'); eraseText('bottom')"
+                                        class="btn col s2 right noMargin noPadding solid bottom dark-20">
+                                    <i class="material-icons icon-turn-180 prefix">keyboard_tab</i></button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+                <button ng-click="goToMode(1)" class="btn right waves-effect waves-light submitButton dark-20 solid whiteborder"
+                        type="submit" name="action">Nästa
+                    <i style="float:left" class="material-icons right">send</i>
+                </button>
+                <!--<button ng-click="clearText()" class="btn left clear whiteborder dashed solid" type="submit"-->
+                        <!--name="action">Clear-->
+                    <!--<i class="material-icons left">close</i>-->
+                <!--</button>-->
             </div>
-            <button ng-click="goToMode(0)" class="btn left waves-effect waves-light submitButton" type="submit" name="action">Förra
-                <i class="material-icons icon-flipped  left">send</i>
-            </button>
-            <button ng-click="goToMode(2)" class="btn right waves-effect waves-light submitButton" type="submit" name="action">Nästa
-                <i  class="material-icons right">send</i>
-            </button>
-        </div>
 
-        <div ng-show="modes[2]" class="view1">
-            <h1 class="center-align">Har de aldrig?</h1>
-            <div class="row">
-                <div class="col s12">
-                    <div class="card B0-30">
-                        <div class="card-content white-text">
-                            <i>Alternativ 1</i>
-                            <span class="card-title">{{topQuestion}}</span>
+            <div ng-show="modes[1]" class="view1">
+                <h1 class="center-align">Har du aldrig?</h1>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card B0-30">
+                            <div class="card-content white-text">
+                                <i>Drick om du har gjort det</i>
+                                <span class="card-title">{{realQuestion}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <button ng-click="goToMode(0)" class="btn left waves-effect waves-light submitButton dark-20 solid whiteborder" type="submit"
+                        name="action">Tillbaka
+                    <i class="material-icons icon-flipped  left">send</i>
+                </button>
+                <button ng-click="goToMode(2)" class="btn right waves-effect waves-light submitButton dark-20 solid whiteborder" type="submit"
+                        name="action">Nästa
+                    <i class="material-icons right">send</i>
+                </button>
             </div>
-            <div class="row">
-                <div class="col s12">
-                    <div class="card B0-30">
-                        <div class="card-content white-text">
-                            <i>Alternativ 2</i>
-                            <span class="card-title">{{bottomQuestion}}</span>
+
+            <div ng-show="modes[2]" class="view1">
+                <h1 class="center-align">Har de aldrig?</h1>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card B0-30">
+                            <div class="card-content white-text">
+                                <i>Alternativ 1</i>
+                                <span class="card-title">{{topQuestion}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card B0-30">
+                            <div class="card-content white-text">
+                                <i>Alternativ 2</i>
+                                <span class="card-title">{{bottomQuestion}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button ng-click="goToMode(1)" class="btn left waves-effect waves-light submitButton dark-20 solid whiteborder" type="submit"
+                        name="action">Tillbaka
+                    <i class="material-icons icon-flipped  left">send</i>
+                </button>
+                <button ng-click="eraseText('top'); eraseText('bottom'); goToMode(0)" class="btn right waves-effect waves-light submitButton dark-20 solid whiteborder" type="submit"
+                        name="action">Ny Fråga
+                    <i class="material-icons right">replay</i>
+                </button>
             </div>
-            <button ng-click="goToMode(1)" class="btn left waves-effect waves-light submitButton" type="submit" name="action">Förra
-                <i class="material-icons icon-flipped  left">send</i>
-            </button>
-            <button ng-click="goToMode(0)" class="btn right waves-effect waves-light submitButton" type="submit" name="action">Ny Fråga
-                <i  class="material-icons right">replay</i>
-            </button>
         </div>
-    </div>
     </div>
 </div>
